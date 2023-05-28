@@ -1,0 +1,338 @@
+{
+	"info": {
+		"_postman_id": "3286634a-1923-4eea-be23-f5062f04dbe0",
+		"name": "SwaggerPet",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27092875",
+		"_collection_link": "https://bold-space-689972.postman.co/workspace/New-Team-Workspace~d0d426ba-b9a3-4b07-9adb-a662248d41f6/collection/27092875-3286634a-1923-4eea-be23-f5062f04dbe0?action=share&creator=27092875&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "Create account in Swagger",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const userName=\"pratibhav\";\r",
+							"pm.environment.set(\"userName\", userName);\r",
+							"\r",
+							"const password=\"pratibhav123\"\r",
+							"pm.environment.set(\"password\", password);\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 0,\r\n  \"username\": \"{{userName}}\",\r\n  \"firstName\": \"string\",\r\n  \"lastName\": \"string\",\r\n  \"email\": \"string\",\r\n  \"password\": \"{{password}}\",\r\n  \"phone\": \"string\",\r\n  \"userStatus\": 0\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseUrlSwagger}}/user",
+					"host": [
+						"{{BaseUrlSwagger}}"
+					],
+					"path": [
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login in Swagger",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"const sid=pm.response.json().message.split(\":\")[1];\r",
+							"\r",
+							"pm.environment.set(\"sid\", sid);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BaseUrlSwagger}}/user/login?username={{userName}}&password={{password}}",
+					"host": [
+						"{{BaseUrlSwagger}}"
+					],
+					"path": [
+						"user",
+						"login"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "{{userName}}"
+						},
+						{
+							"key": "password",
+							"value": "{{password}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update an Existing Pet",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 1,\r\n  \"category\": {\r\n    \"id\": 0,\r\n    \"name\": \"storms\"\r\n  },\r\n  \"name\": \"Weather\",\r\n  \"photoUrls\": [\r\n    \"string\"\r\n  ],\r\n  \"tags\": [\r\n    {\r\n      \"id\": 0,\r\n      \"name\": \"warrior55\"\r\n    }\r\n  ],\r\n  \"status\": \"available\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseUrlSwagger}}/pet",
+					"host": [
+						"{{BaseUrlSwagger}}"
+					],
+					"path": [
+						"pet"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add an Pet",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"const id=10;\r",
+							"pm.environment.set(\"id\", id)\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": {{id}},\r\n  \"category\": {\r\n    \"id\": 0,\r\n    \"name\": \"TR\"\r\n  },\r\n  \"name\": \"catsasas\",\r\n  \"photoUrls\": [\r\n    \"string\"\r\n  ],\r\n  \"tags\": [\r\n    {\r\n      \"id\": 0,\r\n      \"name\": \"good454\"\r\n    }\r\n  ],\r\n  \"status\": \"available\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseUrlSwagger}}/pet",
+					"host": [
+						"{{BaseUrlSwagger}}"
+					],
+					"path": [
+						"pet"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update an Pet",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{BaseUrlSwagger}}/pet/{{id}}?petId={{id}}&name=\"qwertyuiop\"&status=\"asdfghjkl\"",
+					"host": [
+						"{{BaseUrlSwagger}}"
+					],
+					"path": [
+						"pet",
+						"{{id}}"
+					],
+					"query": [
+						{
+							"key": "petId",
+							"value": "{{id}}"
+						},
+						{
+							"key": "name",
+							"value": "\"qwertyuiop\""
+						},
+						{
+							"key": "status",
+							"value": "\"asdfghjkl\""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Find a Pet",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BaseUrlSwagger}}/pet/{{id}}?petId={{id}}",
+					"host": [
+						"{{BaseUrlSwagger}}"
+					],
+					"path": [
+						"pet",
+						"{{id}}"
+					],
+					"query": [
+						{
+							"key": "petId",
+							"value": "{{id}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete an Pet",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{BaseUrlSwagger}}/pet/{{id}}?api_key=\"special-key\"&petId={{id}}",
+					"host": [
+						"{{BaseUrlSwagger}}"
+					],
+					"path": [
+						"pet",
+						"{{id}}"
+					],
+					"query": [
+						{
+							"key": "api_key",
+							"value": "\"special-key\""
+						},
+						{
+							"key": "petId",
+							"value": "{{id}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Logout from Swagger",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BaseUrlSwagger}}/user/logout",
+					"host": [
+						"{{BaseUrlSwagger}}"
+					],
+					"path": [
+						"user",
+						"logout"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
