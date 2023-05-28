@@ -1,0 +1,112 @@
+{
+	"info": {
+		"_postman_id": "62b39706-b694-4056-9da2-cbc3cc5376a5",
+		"name": "AddDeleteGoogleMAp",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27092875"
+	},
+	"item": [
+		{
+			"name": "AddLocation",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Body matches string place_id\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"place_id\");\r",
+							"});\r",
+							"\r",
+							"const id=pm.response.json().place_id;\r",
+							"\r",
+							"// pm.globals.set(\"place_id\", id);\r",
+							"pm.environment.set(\"place_id\", id);\r",
+							"\r",
+							"pm.test(\"Checking  Staus\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.status).to.eql(\"OK\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\r\n    \"location\":{\r\n\r\n        \"lat\" : -38.383494,\r\n\r\n        \"lng\" : 33.427362\r\n\r\n    },\r\n\r\n    \"accuracy\":50,\r\n\r\n    \"name\":\"Frontline house\",\r\n\r\n    \"phone_number\":\"(+91) 983 893 3937\",\r\n\r\n    \"address\" : \"29, side layout, cohen 09\",\r\n\r\n    \"types\": [\"shoe park\",\"shop\"],\r\n\r\n    \"website\" : \"http://google.com\",\r\n\r\n    \"language\" : \"French-IN\"\r\n\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseUrl}}/maps/api/place/add/json?key= qaclick123",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"maps",
+						"api",
+						"place",
+						"add",
+						"json"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": " qaclick123"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete-Location",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"place_id\": \"{{place_id}}\"        \r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseUrl}}/maps/api/place/delete/json?key=qaclick123",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"maps",
+						"api",
+						"place",
+						"delete",
+						"json"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "qaclick123"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

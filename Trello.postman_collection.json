@@ -1,0 +1,139 @@
+{
+	"info": {
+		"_postman_id": "2588cd60-55d5-4553-bbea-e1c432dbed3c",
+		"name": "Trello",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27092875"
+	},
+	"item": [
+		{
+			"name": "Create an Board",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"pm.environment.set(\"id\", pm.response.json().id);\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{BaseUrlTrello}}/1/boards/?name={{$randomFullName}}&key={{apiKey}}&token={{accessToken}}",
+					"host": [
+						"{{BaseUrlTrello}}"
+					],
+					"path": [
+						"1",
+						"boards",
+						""
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "{{$randomFullName}}"
+						},
+						{
+							"key": "key",
+							"value": "{{apiKey}}"
+						},
+						{
+							"key": "token",
+							"value": "{{accessToken}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update an Board",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"desc\":\"The new Description updated\",\r\n    \"name\":\"UpdateOne\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseUrlTrello}}/1/boards/{{id}}?key={{apiKey}}&token={{accessToken}}",
+					"host": [
+						"{{BaseUrlTrello}}"
+					],
+					"path": [
+						"1",
+						"boards",
+						"{{id}}"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "{{apiKey}}"
+						},
+						{
+							"key": "token",
+							"value": "{{accessToken}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete an Board",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{BaseUrlTrello}}/1/boards/{{id}}?key={{apiKey}}&token={{accessToken}}",
+					"host": [
+						"{{BaseUrlTrello}}"
+					],
+					"path": [
+						"1",
+						"boards",
+						"{{id}}"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "{{apiKey}}"
+						},
+						{
+							"key": "token",
+							"value": "{{accessToken}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
